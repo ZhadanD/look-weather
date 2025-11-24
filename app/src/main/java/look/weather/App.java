@@ -11,13 +11,22 @@ import org.apache.catalina.startup.Tomcat;
 
 import jakarta.servlet.http.HttpServlet;
 import look.weather.controllers.ContentController;
+import look.weather.controllers.WeatherController;
 
 public class App {
-    private static Map<String, HttpServlet> servlets = Map.of();
+    private static Map<String, HttpServlet> servlets = Map.of(
+        "weatherController", new WeatherController()
+    );
 
-    private static Map<String, String> endPoints = Map.of();
+    private static Map<String, String> endPoints = Map.of(
+        "/weather", "weatherController"
+    );
 
-    private static String[] content = {};
+    private static String[] content = {
+        "/",
+        "/css/weatherForecast.css",
+        "/js/weatherForecast.js"
+    };
 
     public static void main(String[] args) throws Exception {
         Tomcat tomcat = new Tomcat();
